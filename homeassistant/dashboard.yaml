@@ -1,0 +1,98 @@
+type: vertical-stack
+cards:
+  - type: custom:text-divider-row
+    text: Analog LED Clock
+  - type: entities
+    entities:
+      - entity: sensor.time
+        name: Current Clock Time
+      - entity: sensor.analog_clock_last_boot
+        name: Clock Controller Last Boot
+        secondary_info: none
+        icon: mdi:shoe-cleat
+      - entity: sensor.analog_clock_tft_last_boot_formatted
+        secondary_info: none
+        name: TFT Display Last Boot
+        icon: mdi:shoe-cleat
+  - type: entities
+    entities:
+      - entity: switch.analog_clock_leds
+        name: All LEDs
+        icon: mdi:led-variant-outline
+  - type: custom:text-divider-row
+    text: Minute LED Display
+  - type: horizontal-stack
+    cards:
+      - aspect_ratio: 1.2/1
+        color: rgb(0,255,158)
+        color_type: card
+        entity: switch.analog_clock_mode_full
+        icon: mdi:dots-circle
+        name: All LEDs
+        tap_action:
+          action: toggle
+        type: custom:button-card
+      - aspect_ratio: 1.2/1
+        color: rgb(0,255,158)
+        color_type: card
+        entity: switch.analog_clock_mode_single_led
+        icon: mdi:circle-small
+        name: One LED
+        tap_action:
+          action: toggle
+        type: custom:button-card
+      - aspect_ratio: 1.2/1
+        color: rgb(0,255,158)
+        color_type: card
+        entity: switch.analog_clock_mode_five_led
+        icon: mdi:dots-horizontal
+        name: 5 LEDs
+        tap_action:
+          action: toggle
+        type: custom:button-card
+      - aspect_ratio: 1.2/1
+        color: rgb(0,255,158)
+        color_type: card
+        entity: switch.analog_clock_mode_ten_led
+        icon: mdi:dots-triangle
+        name: 10 LEDs
+        tap_action:
+          action: toggle
+        type: custom:button-card
+      - aspect_ratio: 1.2/1
+        color: rgb(0,255,158)
+        color_type: card
+        entity: switch.analog_clock_mode_fifteen_led
+        icon: mdi:dots-grid
+        name: 15 LEDs
+        tap_action:
+          action: toggle
+        type: custom:button-card
+  - type: entities
+    entities:
+      - entity: switch.analog_clock_blink_led
+        icon: mdi:led-on
+        name: Blink Current Minute LED
+      - entity: switch.analog_clock_sweep_mode
+        icon: mdi:broom
+        name: Use Sweep Mode for All LEDs Display
+
+type: vertical-stack
+cards:
+  - type: custom:text-divider-row
+    text: TFT Display
+  - type: tile
+    entity: light.analog_clock_tft_backlight
+    name: TFT Backlight
+    features:
+      - type: light-brightness
+  - type: custom:text-divider-row
+    text: Controller Restarts
+  - type: entities
+    entities:
+      - icon: mdi:restart
+        name: Clock Controller Reboot
+        type: weblink
+        url: http://192.168.1.215/restart
+      - entity: button.analog_clock_tft_restart
+        name: TFT Display Controller Restart
