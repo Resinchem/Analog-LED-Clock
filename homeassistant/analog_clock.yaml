@@ -1,0 +1,225 @@
+# ======================================
+#  Analog Clock Package:
+#  Entities and Automations
+#       
+#  Provided as an example only!  You will
+#  need to modify for your own Home Assistant
+#  instance.  
+#
+#  All automation IDs are simply randomly 
+#  generated strings and do not need to
+#  be the same as shown in these examples 
+# ======================================
+
+# ************************************
+#     MQTT ENTITIES
+# ************************************
+mqtt:
+  # ==================
+  #  SENSORS
+  # ==================
+  sensor:
+    # Last Boot time
+    - name: Analog Clock Last Boot
+      state_topic: "stat/aclock/lastboot"
+
+  # ==================
+  #  SWITCHES
+  # ==================
+  switch:
+    # Display Mode
+    - name: Analog Clock Mode Full
+      state_topic: "stat/aclock/dispmode"
+      value_template: >
+        {% if (value | int(0))== 0 %}
+          ON
+        {% else %}
+          OFF
+        {% endif %}
+      command_topic: "cmnd/aclock/dispmode"
+      payload_on: "0"
+      state_on: "ON"
+      state_off: "OFF"
+      retain: false
+    - name: Analog Clock Mode Single LED
+      state_topic: "stat/aclock/dispmode"
+      value_template: >
+        {% if (value | int(0)) == 1 %}
+          ON
+        {% else %}
+          OFF
+        {% endif %}
+      command_topic: "cmnd/aclock/dispmode"
+      payload_on: "1"
+      state_on: "ON"
+      state_off: "OFF"
+      retain: false
+    - name: Analog Clock Mode Five LED
+      state_topic: "stat/aclock/dispmode"
+      value_template: >
+        {% if (value | int(0)) == 2 %}
+          ON
+        {% else %}
+          OFF
+        {% endif %}
+      command_topic: "cmnd/aclock/dispmode"
+      payload_on: "2"
+      state_on: "ON"
+      state_off: "OFF"
+      retain: false
+    - name: Analog Clock Mode Ten LED
+      state_topic: "stat/aclock/dispmode"
+      value_template: >
+        {% if (value | int()) == 3 %}
+          ON
+        {% else %}
+          OFF
+        {% endif %}
+      command_topic: "cmnd/aclock/dispmode"
+      payload_on: "3"
+      state_on: "ON"
+      state_off: "OFF"
+      retain: false
+    - name: Analog Clock Mode Fifteen LED
+      state_topic: "stat/aclock/dispmode"
+      value_template: >
+        {% if (value | int()) == 4 %}
+          ON
+        {% else %}
+          OFF
+        {% endif %}
+      command_topic: "cmnd/aclock/dispmode"
+      payload_on: "4"
+      state_on: "ON"
+      state_off: "OFF"
+      retain: false
+
+    # Blink Last LED 
+    - name: Analog Clock Blink LED
+      state_topic: "stat/aclock/blink"
+      command_topic: "cmnd/aclock/blink"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    # Sweep Effect (only applicable for Display Mode 0 - ignored otherwise)
+    - name: Analog Clock Sweep Mode
+      state_topic: "stat/aclock/sweep"
+      command_topic: "cmnd/aclock/sweep"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    # LEDs ON/OFF
+    - name: Analog Clock LEDS
+      state_topic: "stat/aclock/leds"
+      command_topic: "cmnd/aclock/leds"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+      
+# ////////////////////////////////////////////////////////////////////////
+#    AUTOMATIONS
+# ////////////////////////////////////////////////////////////////////////
+automation:
+  # ========================================
+  #  Publish current time from clock request
+  # ========================================
+  - alias: Analog Clock Publish Time
+    id: 914ad550-8e48-4513-9760-b69264c81699
+    trigger:
+      platform: mqtt
+      topic: "stat/aclock/gettime"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "stat/tm1638/hatime"    #See comment below on date and time for the clock
+          payload: "{{ states('sensor.time') }}"
+      - service: mqtt.publish
+        data:
+          topic: "stat/tm1638/hadate"
+          payload: "{{ states('sensor.date') }}"
+
+  # ===================================================
+  #  Turn LEDs and TFT Off/On with Main Basement Lights
+  # ===================================================
+  - alias: Analog CLock Off With Basement Lights
+    id: d93d6f8b-206a-4581-8ef9-32cfd79e3538
+    trigger:
+      platform: state
+      entity_id: light.basement
+      from: "on"
+      to: "off"
+    action:
+      - service: mqtt.publish
+        data: 
+          topic: "cmnd/aclock/leds"
+          payload: "OFF"
+      # Also turn off backlight on the ILI9341 display
+      - service: light.turn_off
+        target:
+          entity_id: light.analog_clock_tft_backlight
+
+  - alias: Analog Clock On With Basement Lights
+    id: 7061615b-0b37-4eeb-8a3c-d48a3846cccd
+    trigger:
+      platform: state
+      entity_id: light.basement
+      from: "off"
+      to: "on"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/aclock/leds"
+          payload: "ON"
+      # Turn on the ILI9341 backlight  
+      - service: light.turn_on
+        target:
+          entity_id: light.analog_clock_tft_backlight
+        data:
+          brightness_pct: 75
+        
+# --------------------------------------------------
+#  These automations are from a separate package
+#  that publishes the current time at the top of 
+#  each minute and the date at midnight each day
+#  for use by my TM1638 displays.  However,
+#  the clock can subscribe to these same topics 
+#  to update its own time.
+# --------------------------------------------------
+  - alias: TM1638 Time
+    # Publish Home Assistant Time to MQTT
+    # Will update at the top of each minute
+    id: b91669a8-360b-4a42-bb49-6488ec34538b
+    trigger:
+      platform: state
+      entity_id: sensor.time
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "stat/tm1638/hatime"
+          payload: "{{ states('sensor.time') }}"
+      - service: mqtt.publish     #This is for Github version (for now)
+        data:
+          topic: "cmnd/tm1638/hatime"
+          payload: "{{ states('sensor.time') }}"
+    
+    # Publish the date.  This will update at midnight
+    # each day
+  - alias: TM1638 Date
+    id: 460fc310-e882-4eeb-917e-f479e2536a6c
+    trigger:
+      platform: state
+      entity_id: sensor.date
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "stat/tm1638/hadate"
+          payload: "{{ states('sensor.date') }}"
+          retain: true
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/tm1638/hadate"
+          payload: "{{ states('sensor.date') }}"
+          retain: true
+
