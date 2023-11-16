@@ -4,7 +4,7 @@ This project started as a way to demonstrate the use of MCP23017 port expanders 
 ![ClockFace_Final_Github2](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/57a7d127-6223-4b32-a715-53b4ede319d6)
 
 This particular project was primarily about the journey of designing and using a custom PCB.  If you want to know more about this particular project, please refer to the following:
-- TO DO - YouTube Video
+- [Unlocking the Power of PCBs](https://youtu.be/uTdGtw9cBE4) - YouTube Video
 - [When It's Time to Create a Custom PCB](https://resinchemtech.blogspot.com/2023/11/custom-pcb-time.html) - Written blog article
 
 If you want to know more about the MCP23017 port expanders, I cover those in the following:
