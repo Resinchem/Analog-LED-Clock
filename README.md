@@ -3,13 +3,13 @@ This project started as a way to demonstrate the use of MCP23017 port expanders 
 
 ![ClockFace_Final_Github2](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/57a7d127-6223-4b32-a715-53b4ede319d6)
 
-If you want to know more about the MCP23017 port expanders, I cover those in the following:
-- [MCP23017 Port Expander and ESPHome: Add More I/O Pins to Your Project](https://youtu.be/GyHiSyoyk_0) - YouTube video
-- [Add up to 128 I/O Pins to your ESP Board](https://resinchemtech.blogspot.com/2023/10/IO-expander.html) - Written blog article
-
 This particular project was primarily about the journey of designing and using a custom PCB.  If you want to know more about this particular project, please refer to the following:
 - TO DO - YouTube Video
 - [When It's Time to Create a Custom PCB](https://resinchemtech.blogspot.com/2023/11/custom-pcb-time.html) - Written blog article
+
+If you want to know more about the MCP23017 port expanders, I cover those in the following:
+- [MCP23017 Port Expander and ESPHome: Add More I/O Pins to Your Project](https://youtu.be/GyHiSyoyk_0) - YouTube video
+- [Add up to 128 I/O Pins to your ESP Board](https://resinchemtech.blogspot.com/2023/10/IO-expander.html) - Written blog article
 
 ### The clock controller code, PCB design files and the 3D .stl files are shared here "AS-IS"!
 
