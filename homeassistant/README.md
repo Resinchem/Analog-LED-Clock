@@ -10,7 +10,7 @@ This is the primary package for the integration of the clock.  It shows how the 
 
 ### dashboard.yaml
 
-![HomeAssistant_Dashboard](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/ffb90392-b0f6-4646-bd70-337f50310b84)
+![HomeAssistant_Dashboard](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/a50616c0-5495-4463-825f-f666d3998ce7)
 
 This contains the YAML used to create the above dashboard.  Again, you will need to modify this for your own entities/installation.  It also used two custom components, installed via the Home Assistant Community Store (HACS):
 
