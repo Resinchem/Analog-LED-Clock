@@ -12,6 +12,6 @@ These are the .stl files for all the 3D printed parts I used for the clock proje
 |Number Covers.stl | Small blocks to glue over the back clock face number cutouts to block light bleedover
 |Standoff Mounts.stl | Mounts to super glue to the back of clock face for mounting the threaded ends of M3 brass stand-offs.
 
-![stl_parts_01](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/f90cfe56-465b-4d1d-9035-7f920908f680)
+![stl_parts_01](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/ee5b06ee-f6a9-4a5b-9615-c736ac74aa7c)
 
-![stl_parts_02](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/4c3f4521-cc46-4ce9-928b-e9fa040ccb82)
+![stl_parts_02](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/36d25af7-df8f-4828-9586-7335500e791d)
