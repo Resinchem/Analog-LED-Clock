@@ -1,7 +1,7 @@
 ## Analog-LED-Clock
 This project started as a way to demonstrate the use of MCP23017 port expanders with ESP boards.  I decided to take the original breadboard version and use it to create my first custom PCB. I also added some additional features to the final clock.
 
-![ClockFace_Final_Github2](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/57a7d127-6223-4b32-a715-53b4ede319d6)
+![ClockFace_Final_Github2](https://github.com/Resinchem/Analog-LED-Clock/assets/55962781/abf23fb2-5731-4582-8ca0-23eceffbf76a)
 
 This particular project was primarily about the journey of designing and using a custom PCB.  If you want to know more about this particular project, please refer to the following:
 - [Unlocking the Power of PCBs](https://youtu.be/uTdGtw9cBE4) - YouTube Video
