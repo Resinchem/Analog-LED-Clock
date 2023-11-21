@@ -15,7 +15,7 @@
    and feature enhancement requests will not be accepted for this project.
    
    Board: LOLIN(WEMOS) D1, R2 & mini (other boards or ESP32 may require library/code changes)
-   v1.01 Nov. 2023
+   v1.02 Nov. 2023
    Resinchem Tech - licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
    =========================================================================================*/
 #include <ESP8266WiFi.h>
@@ -280,6 +280,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
       allLEDsOff();
     }
     updateMqttLeds();
+  } else if (strcmp(topic, MQTT_TOPIC_SUB"/test") == 0) {
+    testLEDS();
   }
   
 }
@@ -835,6 +837,9 @@ void testLEDS() {
 */
   byte i;
   byte j;
+  //Turn off all LEDs in case any are on (e.g. called from button press/MQTT)
+  allLEDsOff();
+  
   //Test Loop - Test each LED and segment in order - Lights on
   for (j = 0; j < 4; j++) {  //each segment
     for (i = 0; i < 15; i++) {
@@ -918,6 +923,8 @@ void minLEDsOff(bool sweepMin) {
 }
 
 void updateOTA() {
+  //All LEDs Off
+  allLEDsOff();
   // turn on quarterly hour LEDs to indicate OTA update is active and ready to receive
   mcp_hour.digitalWrite(3, HIGH);
   mcp_hour.digitalWrite(6, HIGH);
