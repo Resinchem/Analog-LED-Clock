@@ -15,3 +15,7 @@ If you want to know more about the MCP23017 port expanders, I cover those in the
 
 The files are being shared here primarily as support for the above video and blog article and for those that wish to learn more about how it works, or to use my version as a framewwork for their own project.  And while I will provide some general information in each folder's README file and a little more in the wiki, it is unlikely I will continue to make enhancements.  And while the PCB was designed to also accommodate an ESP32 mini instead of the D1 Mini/ESP8266, I do not intend to release an ESP32 version.  **PLEASE DON'T ASK!**<br><br />
 If you wish to use an ESP32, clone or fork the repository and update the libraries and GPIO pins for the ESP32 mini.  I will not be accepting PRs, issue reports or enhancement requests for this repo.  If you have questions or comments, please post those in the comment section of the above video or blog article.
+
+It takes substantial time, effort and cost to develop and maintain this repository. If you find it helpful and would like to say 'thanks', please consider supporting this project and future development:
+
+<a href="https://www.buymeacoffee.com/resinchemtech" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
